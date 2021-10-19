@@ -7,6 +7,6 @@ class Number extends Equatable{
   Number({required this.text, required this.number});
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [text, number];
 
 }
