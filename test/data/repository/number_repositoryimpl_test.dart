@@ -58,8 +58,8 @@ void main(){
 
     test('the device is online', () async {
       when(networkInfo.isConnected).thenAnswer((_) async => true);
-      repositoryImpl.getConcreteNumber(tNumber);
-      verify(networkInfo.isConnected);
+      //repositoryImpl.getConcreteNumber(tNumber);
+      expect(await networkInfo.isConnected, true);
     });
 
     runTestsOnline(() {
