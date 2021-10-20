@@ -27,11 +27,6 @@ abstract class NumberLocalDataSource {
 //     }
 //   }
 //
-//   @override
-//   Future<void>? cacheNumber(Number toCache) {
-//     // TODO: implement cacheNumber
-//     throw UnimplementedError();
-//   }
 //
 //   // @override
 //   // Future<void>? cacheNumber(Number toCache) {
