@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_number_game/core/usecases/usecase.dart';
 import 'package:flutter_number_game/domain/entities/number.dart';
 import 'package:flutter_number_game/domain/repository/number_repository.dart';
-import 'package:flutter_number_game/domain/usecases/get_concrete_number.dart';
 import 'package:flutter_number_game/domain/usecases/get_random_number.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';

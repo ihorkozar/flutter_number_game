@@ -47,7 +47,7 @@ void main() {
       //act
       final call = dataSource.getLastNumber;
       //assert
-      expect(() => call(), throwsA(TypeMatcher<CacheException>()));
+      expect(() => call(), throwsA(const TypeMatcher<CacheException>()));
     });
   });
 

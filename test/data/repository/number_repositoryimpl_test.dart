@@ -52,7 +52,7 @@ void main(){
   }
 
   group('getConcreteNumber', () {
-    final tNumber = 1;
+    const tNumber = 1;
     final tNumberModel = NumberModel(text: 'test', number: tNumber);
     final Number tNumberInfo = tNumberModel;
 
