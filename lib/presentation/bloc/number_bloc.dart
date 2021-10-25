@@ -32,8 +32,7 @@ class NumberBloc extends Bloc<NumberEvent, NumberState> {
     if (event is GetConcreteNumberEvent) {
       final inputEither = inputConverter.stringToInteger(event.numberString);
 
-      yield* inputEither.fold(
-         (failure) async* {
+      yield* inputEither.fold((failure) async* {
         yield const Error(msg: invalidInputFailureMessage);
       }, (integer) async* {
         yield Loading();
@@ -52,8 +51,10 @@ class NumberBloc extends Bloc<NumberEvent, NumberState> {
 
   Stream<NumberState> _loadedOrErrorState(
       Either<Failure, Number> failureOrNumber) async* {
-    yield failureOrNumber.fold((failure) => Error(msg: _failureToMsg(failure)),
-        (number) => Loaded(number: number));
+    yield failureOrNumber.fold(
+      (failure) => Error(msg: _failureToMsg(failure)),
+      (number) => Loaded(number: number),
+    );
   }
 
   String _failureToMsg(Failure failure) {
