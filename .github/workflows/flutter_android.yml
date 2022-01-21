@@ -32,6 +32,8 @@ jobs:
       - name: 🔎 Run tests
         run: flutter test
         
-      - name: 🎉 Run build 
-      - run: flutter build apk
-      - run: flutter build appbundle
+      - name: 🎉 Run build apk
+        run: flutter build apk
+        
+      - name: 🎉 Run build appbundle
+        run: flutter build appbundle
