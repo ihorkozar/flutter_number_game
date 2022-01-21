@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Flutter test & analyze
+name: Flutter test & analyze (android)
 
 on:
   push:
@@ -16,24 +16,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/setup-java@v1
-        with:
-          java-version: "12.x"
-
-      - uses: subosito/flutter-action@v1
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
-      - uses: actions/checkout@v1
 
-      - name: Install dependencies
+      - name: 🖥️ Install dependencies
         run: dart pub get
         
-      - name: Flutter build_runner build
+      - name: 💡 Flutter build_runner build
         run: flutter pub run build_runner build --delete-conflicting-outputs
 
       # Consider passing '--fatal-infos' for slightly stricter analysis.
-      - name: Analyze project source
+      - name: 🔎 Analyze project source
         run: dart analyze
 
-      - name: Run tests
+      - name: 🔎 Run tests
         run: flutter test
+        
+      - name: 🎉 Run build 
+      - run: flutter build apk
+      - run: flutter build appbundle
