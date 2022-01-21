@@ -8,9 +8,9 @@ import 'package:flutter_number_game/domain/usecases/get_concrete_number.dart';
 import 'package:flutter_number_game/domain/usecases/get_random_number.dart';
 import 'package:flutter_number_game/presentation/bloc/number_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:universal_internet_checker/universal_internet_checker.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -44,7 +44,7 @@ Future<void> init() async {
 
   //NetworkInfo
   serviceLocator.registerLazySingleton<NetworkInfo>(
-      () => NetworkInfoImpl(serviceLocator()),);
+      () => NetworkInfoImpl(),);
 
   //SharedPref
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -52,5 +52,5 @@ Future<void> init() async {
 
   //HttpClient
   serviceLocator.registerLazySingleton(() => http.Client());
-  serviceLocator.registerLazySingleton(() => InternetConnectionChecker());
+  serviceLocator.registerLazySingleton(() => UniversalInternetChecker());
 }
