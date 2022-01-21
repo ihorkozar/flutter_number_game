@@ -29,13 +29,13 @@ dependencies:
   # Cache
   shared_preferences: ^2.0.8
   analyzer: ^3.1.0
+  build_runner: ^2.1.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
   mockito: ^5.0.10
-  build_runner: ^2.1.4
   dart_code_metrics: ^4.10.0-dev.2
 
 # For information on the generic Dart part of this file, see the
