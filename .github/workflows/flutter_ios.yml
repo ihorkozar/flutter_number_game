@@ -34,4 +34,7 @@ jobs:
         run: flutter test
         
       - name: Run build apk
-      - run: flutter build apk
+        run: flutter build apk
+      
+      - name: Run build appbundle
+        run: flutter build appbundle
