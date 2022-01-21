@@ -10,11 +10,11 @@ import '../../fixture/fixture_reader.dart';
 import 'local_datasource_test.mocks.dart';
 
 @GenerateMocks([
-  SharedPreferences
+  SharedPreferences,
 ], customMocks: [
   MockSpec<SharedPreferences>(
-      as: #MockSharedPreferencesForTest, returnNullOnMissingStub: true),
-])
+      as: #MockSharedPreferencesForTest, returnNullOnMissingStub: true,),
+],)
 void main() {
   late NumberLocalDataSourceImpl dataSource;
   late MockSharedPreferences mockSharedPreferences;
@@ -38,7 +38,7 @@ void main() {
       //assert
       verify(mockSharedPreferences.getString(cachedNumber));
       expect(result, equals(tNumberTriviaModel));
-    });
+    },);
 
     test('should throw a CacheException when there is not a cached value',
         () async {
@@ -48,12 +48,14 @@ void main() {
       final call = dataSource.getLastNumber;
       //assert
       expect(() => call(), throwsA(const TypeMatcher<CacheException>()));
-    });
+    },);
   });
 
   group('cacheNumberTrivia', () {
-    final tNumberTriviaModel = NumberModel(number: 1, text: 'test trivia');
+    const tNumberTriviaModel = NumberModel(number: 1, text: 'test trivia');
     test('should call SharedPreferences to cache the data', () async {
+      when(mockSharedPreferences.setString(any, any))
+          .thenAnswer((_) async => true);
       //act
       dataSource.cacheNumber(tNumberTriviaModel);
       //assert

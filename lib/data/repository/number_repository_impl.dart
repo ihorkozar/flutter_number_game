@@ -18,11 +18,11 @@ class NumberRepositoryImpl implements NumberRepository {
   NumberRepositoryImpl(
       {required this.remoteDataSource,
       required this.localDataSource,
-      required this.networkInfo});
+      required this.networkInfo,});
 
   @override
   Future<Either<Failure, Number>>? getConcreteNumber(
-      int number) async {
+      int number,) async {
     return await _getNumber(() {
       return remoteDataSource.getConcreteNumber(number);
     });
@@ -36,7 +36,7 @@ class NumberRepositoryImpl implements NumberRepository {
   }
 
   Future<Either<Failure, Number>> _getNumber(
-      _ConcreteOrRandomChooser getConcreteOrRandom) async {
+      _ConcreteOrRandomChooser getConcreteOrRandom,) async {
     if (await networkInfo.isConnected) {
       try {
         final remoteNumber = await getConcreteOrRandom();

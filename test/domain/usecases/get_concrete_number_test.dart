@@ -17,7 +17,7 @@ void main() {
     mockNumberRepository = MockNumberRepository();
     usecase = GetConcreteNumber(mockNumberRepository);
     tNumber = 1;
-    tNumberInfo = Number(text: 'text', number: 1);
+    tNumberInfo = const Number(text: 'text', number: 1);
   });
 
   test('get number info from repository', () async {

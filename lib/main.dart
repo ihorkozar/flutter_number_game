@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_number_game/presentation/screens/number_screen.dart';
 import 'package:flutter_number_game/service_locator.dart' as sl;
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Number Game',
       theme: ThemeData(primaryColor: Colors.cyan,
           colorScheme: ColorScheme.fromSwatch().copyWith(
-              secondary: Colors.cyanAccent)),
+              secondary: Colors.cyanAccent,),),
       home: const NumberScreen(),
     );
   }

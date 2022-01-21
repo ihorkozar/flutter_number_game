@@ -16,7 +16,7 @@ void main() {
   setUp(() {
     mockNumberRepository = MockNumberRepository();
     usecase = GetRandomNumber(mockNumberRepository);
-    tNumberInfo = Number(text: 'text', number: 1);
+    tNumberInfo = const Number(text: 'text', number: 1);
   });
 
   test('get random info from repository', () async {

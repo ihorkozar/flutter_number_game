@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../fixture/fixture_reader.dart';
 
 void main() {
-  final tNumberModel = NumberModel(number: 1, text: 'test text');
+  const tNumberModel = NumberModel(number: 1, text: 'test text');
 
   test('is it subclass of Number', () async {
     expect(tNumberModel, isA<Number>());

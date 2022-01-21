@@ -7,6 +7,6 @@ class LoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         height: MediaQuery.of(context).size.height / 2,
-        child: const Center(child: CircularProgressIndicator()));
+        child: const Center(child: CircularProgressIndicator()),);
   }
 }

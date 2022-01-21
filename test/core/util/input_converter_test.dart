@@ -15,8 +15,8 @@ void main() {
         () async {
       const str = '111';
       final result = inputConverter.stringToInteger(str);
-      expect(result, equals(const Right(111)));
-    });
+      expect(result, equals(const Right(111),));
+    },);
 
     test('should return a Failure when the string is not an integer', () async {
       const str = 'aaa';
@@ -29,6 +29,6 @@ void main() {
       const str = '-111';
       final result = inputConverter.stringToInteger(str);
       expect(result, equals(Left(InvalidInputFailure())));
-    });
+    },);
   });
 }

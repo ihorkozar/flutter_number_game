@@ -19,7 +19,7 @@ class GetConcreteNumber implements UseCase<Number, Params> {
 class Params extends Equatable{
   final int number;
 
-  Params({required this.number});
+  const Params({required this.number});
 
   @override
   List<Object?> get props => [number];

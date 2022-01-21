@@ -24,6 +24,6 @@ void main() {
       final result = networkInfo.isConnected;
       verify(mockInternetConnectionChecker.hasConnection);
       expect(result, tHasConnectionFuture);
-    });
+    },);
   });
 }

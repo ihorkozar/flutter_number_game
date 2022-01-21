@@ -30,6 +30,6 @@ class NumberLocalDataSourceImpl implements NumberLocalDataSource {
   @override
   Future<void>? cacheNumber(NumberModel toCache) {
     return sharedPref.setString(
-        cachedNumber, json.encode(toCache.toJson()));
+        cachedNumber, json.encode(toCache.toJson()),);
   }
 }

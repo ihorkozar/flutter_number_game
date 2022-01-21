@@ -15,7 +15,7 @@ class NumberMsgDisplay extends StatelessWidget {
       height: MediaQuery.of(context).size.height / 2,
       child: Column(children: [
         Text(number.number.toString(),
-            style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold)),
+            style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold),),
         Expanded(
           child: Center(
             child: SingleChildScrollView(

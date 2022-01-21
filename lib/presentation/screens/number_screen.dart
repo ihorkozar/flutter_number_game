@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_number_game/presentation/bloc/number_bloc.dart';
@@ -49,12 +48,12 @@ class NumberScreen extends StatelessWidget {
                     );
                   } else {
                     return const Center(
-                        child: Text('I am broke, try again later'));
+                        child: Text('I am broke, try again later'),);
                   }
                 },
               ),
               const SizedBox(height: 20),
-              const NumberControls()
+              const NumberControls(),
             ],
           ),
         ),

@@ -44,7 +44,7 @@ void main() {
   group('GetForConcreteNumber', () {
     const tNumberString = '1';
     const tNumberParsed = 1;
-    final tNumberInfo = Number(text: 'test', number: 1);
+    const tNumberInfo = Number(text: 'test', number: 1);
 
     void setUpMockInputConverterSuccess() =>
         when(mockInputConverter.stringToInteger(any))
@@ -75,18 +75,18 @@ void main() {
     test('should get data from the concrete usecase', () async* {
       setUpMockInputConverterSuccess();
       when(mockGetConcreteNumber(any))
-          .thenAnswer((_) async => Right(tNumberInfo));
+          .thenAnswer((_) async => const Right(tNumberInfo));
       bloc.add(const GetConcreteNumberEvent(tNumberString));
       await untilCalled(mockGetRandomNumber(any));
-      verify(mockGetConcreteNumber(Params(number: tNumberParsed)));
+      verify(mockGetConcreteNumber(const Params(number: tNumberParsed)));
     });
 
     test('should emits [Loading, Loaded] when data is gotten successfully',
         () async* {
       setUpMockInputConverterSuccess();
       when(mockGetConcreteNumber(any))
-          .thenAnswer((_) async => Right(tNumberInfo));
-      final expeted = [Empty(), Loading(), Loaded(number: tNumberInfo)];
+          .thenAnswer((_) async => const Right(tNumberInfo));
+      final expeted = [Empty(), Loading(), const Loaded(number: tNumberInfo)];
       expectLater(bloc, emitsInOrder(expeted));
       bloc.add(const GetConcreteNumberEvent(tNumberString));
     });
@@ -113,11 +113,11 @@ void main() {
   });
 
   group('GetTriviaForRandomNumber', () {
-    final tNumberTrivia = Number(text: 'test', number: 1);
+    const  tNumberTrivia = Number(text: 'test', number: 1);
 
     test('should get data from the random usecase', () async* {
       when(mockGetRandomNumber(any))
-          .thenAnswer((_) async => Right(tNumberTrivia));
+          .thenAnswer((_) async => const Right(tNumberTrivia));
       bloc.add(GetRandomNumberEvent());
       await untilCalled(mockGetRandomNumber(any));
       verify(mockGetRandomNumber(NoParams()));
@@ -126,8 +126,8 @@ void main() {
     test('should emits [Loading, Loaded] when data is gotten successfully',
         () async* {
       when(mockGetRandomNumber(any))
-          .thenAnswer((_) async => Right(tNumberTrivia));
-      final expected = [Empty(), Loading(), Loaded(number: tNumberTrivia)];
+          .thenAnswer((_) async => const Right(tNumberTrivia));
+      final expected = [Empty(), Loading(), const Loaded(number: tNumberTrivia)];
       expectLater(bloc, emitsInOrder(expected));
       bloc.add(GetRandomNumberEvent());
     });
