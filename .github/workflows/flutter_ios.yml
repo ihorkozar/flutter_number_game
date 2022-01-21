@@ -19,19 +19,19 @@ jobs:
         with:
           channel: "stable"
 
-      - name: 🖥️ Install dependencies
+      - name: Install dependencies
         run: dart pub get
         
-      - name: 💡 Flutter build_runner build
+      - name: Flutter build_runner build
         run: flutter pub run build_runner build --delete-conflicting-outputs
 
       # Consider passing '--fatal-infos' for slightly stricter analysis.
-      - name: 🔎 Analyze project source
+      - name: Analyze project source
         run: dart analyze
 
-      - name: 🔎 Run tests
+      - name: Run tests
         run: flutter test
         
-      - name: 🎉 Run build 
+      - name: Run build 
       - run: flutter build apk
       - run: flutter build appbundle
