@@ -4,9 +4,9 @@ class Number extends Equatable{
   final String text;
   final int number;
 
-  Number({required this.text, required this.number});
+  const Number({required this.text, required this.number});
 
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [text, number];
 
 }
