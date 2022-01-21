@@ -1,0 +1,37 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Flutter test & analyze (ios)
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+
+      - name: 🖥️ Install dependencies
+        run: dart pub get
+        
+      - name: 💡 Flutter build_runner build
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      # Consider passing '--fatal-infos' for slightly stricter analysis.
+      - name: 🔎 Analyze project source
+        run: dart analyze
+
+      - name: 🔎 Run tests
+        run: flutter test
+        
+      - name: 🎉 Run build 
+      - run: flutter build apk
+      - run: flutter build appbundle
