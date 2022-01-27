@@ -28,7 +28,6 @@ dependencies:
   http: ^0.13.4
   # Cache
   shared_preferences: ^2.0.12
-  analyzer: ^3.1.0
   build_runner: ^2.1.4
 
 dev_dependencies:
@@ -38,13 +37,6 @@ dev_dependencies:
   mockito: ^5.0.10
   dart_code_metrics: ^4.10.0-dev.2
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter.
 flutter:
 
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
