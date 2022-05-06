@@ -1,6 +1,6 @@
 # flutter_number_game
 
-A new Flutter project.
+Flutter number game project.
 
 # Full command to generate a Dart Code Metrics html report
 
