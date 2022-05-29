@@ -18,23 +18,17 @@ jobs:
       
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: '2.10.5'
           channel: "stable"
 
-      - name: Install dependencies
+      - name: 🖥️ Install dependencies
         run: dart pub get
         
-      - name: Flutter build_runner build
+      - name: 💡 Flutter build_runner build
         run: flutter pub run build_runner build --delete-conflicting-outputs
 
-      # Consider passing '--fatal-infos' for slightly stricter analysis.
-      - name: Analyze project source
-        run: dart analyze
-
-      - name: Run tests
+      - name: 🔎 Run tests
         run: flutter test
-        
-      - name: Run build apk
-        run: flutter build apk
       
-      - name: Run build appbundle
-        run: flutter build appbundle
+      - name: 🎉  Run build ipa
+        run: flutter build ipa
