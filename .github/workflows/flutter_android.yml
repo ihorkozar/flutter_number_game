@@ -7,10 +7,8 @@ name: Flutter test & analyze (android)
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ master, develop]
   pull_request:
-    branches: [ develop ]
+    branches: [ master, develop ]
 
 jobs:
   build:
@@ -20,6 +18,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: '2.10.5'
           channel: "stable"
 
       - name: 🖥️ Install dependencies
@@ -28,15 +27,8 @@ jobs:
       - name: 💡 Flutter build_runner build
         run: flutter pub run build_runner build --delete-conflicting-outputs
 
-      # Consider passing '--fatal-infos' for slightly stricter analysis.
-      - name: 🔎 Analyze project source
-        run: dart analyze
-
       - name: 🔎 Run tests
         run: flutter test
-        
-      - name: 🎉 Run build apk
-        run: flutter build apk
         
       - name: 🎉 Run build appbundle
         run: flutter build appbundle
