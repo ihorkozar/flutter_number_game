@@ -3,11 +3,11 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_number_game/core/error/exceptions.dart';
 import 'package:flutter_number_game/data/models/number_model.dart';
 
-const url ='http://numbersapi.com';
+const url = 'http://numbersapi.com';
 
 //go to the retrofit in the feature
 
-abstract class NumberRemoteDataSource{
+abstract class NumberRemoteDataSource {
   Future<NumberModel> getConcreteNumber(int number);
   Future<NumberModel> getRandomNumber();
 }
@@ -32,6 +32,5 @@ class NumberRemoteDataSourceImpl implements NumberRemoteDataSource {
       _getNumberFromUrl('$url/$number');
 
   @override
-  Future<NumberModel> getRandomNumber() =>
-      _getNumberFromUrl('$url/random');
+  Future<NumberModel> getRandomNumber() => _getNumberFromUrl('$url/random');
 }

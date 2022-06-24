@@ -42,8 +42,7 @@ void main() {
           headers: {'Content-Type': 'application/json'}));
     });
 
-    test('should return NumberTrivia when the response code is 200',
-        () async {
+    test('should return NumberTrivia when the response code is 200', () async {
       //arrange
       setUpMockHttpClientSuccess200();
       //act
@@ -59,7 +58,8 @@ void main() {
       //act
       final call = dataSource.getConcreteNumber;
       //assert
-      expect(() => call(tNumber), throwsA(const TypeMatcher<ServerException>()));
+      expect(
+          () => call(tNumber), throwsA(const TypeMatcher<ServerException>()));
     });
   });
   group('getRandomNumberTrivia', () {
@@ -76,8 +76,7 @@ void main() {
           headers: {'Content-Type': 'application/json'}));
     });
 
-    test('should return NumberTrivia when the response code is 200',
-        () async {
+    test('should return NumberTrivia when the response code is 200', () async {
       //arrange
       setUpMockHttpClientSuccess200();
       //act
@@ -85,8 +84,7 @@ void main() {
       //assert
       expect(result, equals(tNumberModel));
     });
-    test(
-        'should throw a ServerException when the response code is 404',
+    test('should throw a ServerException when the response code is 404',
         () async {
       //arrange
       setUpMockHttpClientFailure404();

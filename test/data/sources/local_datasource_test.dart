@@ -9,12 +9,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../fixture/fixture_reader.dart';
 import 'local_datasource_test.mocks.dart';
 
-@GenerateMocks([
-  SharedPreferences,
-], customMocks: [
-  MockSpec<SharedPreferences>(
-      as: #MockSharedPreferencesForTest, returnNullOnMissingStub: true,),
-],)
+@GenerateMocks(
+  [
+    SharedPreferences,
+  ],
+  customMocks: [
+    MockSpec<SharedPreferences>(
+      as: #MockSharedPreferencesForTest,
+      returnNullOnMissingStub: true,
+    ),
+  ],
+)
 void main() {
   late NumberLocalDataSourceImpl dataSource;
   late MockSharedPreferences mockSharedPreferences;
@@ -28,27 +33,30 @@ void main() {
     final tNumberTriviaModel =
         NumberModel.fromJson(json.decode(fixture('cached.json')));
     test(
-        'should return NumberTrivia from SharedPreferences when there is one in the cache',
-        () async {
-      //arrange
-      when(mockSharedPreferences.getString(any))
-          .thenReturn(fixture('cached.json'));
-      //act
-      final result = await dataSource.getLastNumber();
-      //assert
-      verify(mockSharedPreferences.getString(cachedNumber));
-      expect(result, equals(tNumberTriviaModel));
-    },);
+      'should return NumberTrivia from SharedPreferences when there is one in the cache',
+      () async {
+        //arrange
+        when(mockSharedPreferences.getString(any))
+            .thenReturn(fixture('cached.json'));
+        //act
+        final result = await dataSource.getLastNumber();
+        //assert
+        verify(mockSharedPreferences.getString(cachedNumber));
+        expect(result, equals(tNumberTriviaModel));
+      },
+    );
 
-    test('should throw a CacheException when there is not a cached value',
-        () async {
-      //arrange
-      when(mockSharedPreferences.getString(any)).thenReturn(null);
-      //act
-      final call = dataSource.getLastNumber;
-      //assert
-      expect(() => call(), throwsA(const TypeMatcher<CacheException>()));
-    },);
+    test(
+      'should throw a CacheException when there is not a cached value',
+      () async {
+        //arrange
+        when(mockSharedPreferences.getString(any)).thenReturn(null);
+        //act
+        final call = dataSource.getLastNumber;
+        //assert
+        expect(() => call(), throwsA(const TypeMatcher<CacheException>()));
+      },
+    );
   });
 
   group('cacheNumberTrivia', () {

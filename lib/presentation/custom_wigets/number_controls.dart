@@ -38,16 +38,20 @@ class _NumberControlsState extends State<NumberControls> {
         Row(
           children: [
             Expanded(
-                child: ElevatedButton(
-                  onPressed: getConcrete,
-                  child: const Text('Search'),
-                ),),
-            const SizedBox(width: 10,),
+              child: ElevatedButton(
+                onPressed: getConcrete,
+                child: const Text('Search'),
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
             Expanded(
-                child: ElevatedButton(
-                  onPressed: getRandom,
-                  child: const Text('Get random'),
-                ),),
+              child: ElevatedButton(
+                onPressed: getRandom,
+                child: const Text('Get random'),
+              ),
+            ),
           ],
         ),
       ],

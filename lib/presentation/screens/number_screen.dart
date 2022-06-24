@@ -48,7 +48,8 @@ class NumberScreen extends StatelessWidget {
                     );
                   } else {
                     return const Center(
-                        child: Text('I am broke, try again later'),);
+                      child: Text('I am broke, try again later'),
+                    );
                   }
                 },
               ),

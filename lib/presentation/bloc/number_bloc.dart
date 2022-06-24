@@ -19,11 +19,11 @@ class NumberBloc extends Bloc<NumberEvent, NumberState> {
   final GetRandomNumber getRandomNumber;
   final InputConverter inputConverter;
 
-  NumberBloc(
-      {required this.getConcreteNumber,
-      required this.getRandomNumber,
-      required this.inputConverter,})
-      : super(Empty());
+  NumberBloc({
+    required this.getConcreteNumber,
+    required this.getRandomNumber,
+    required this.inputConverter,
+  }) : super(Empty());
 
   get initialState => Empty();
 
@@ -32,16 +32,19 @@ class NumberBloc extends Bloc<NumberEvent, NumberState> {
     if (event is GetConcreteNumberEvent) {
       final inputEither = inputConverter.stringToInteger(event.numberString);
 
-      yield* inputEither.fold((failure) async* {
-        yield const Error(msg: invalidInputFailureMessage);
-      }, (integer) async* {
-        yield Loading();
+      yield* inputEither.fold(
+        (failure) async* {
+          yield const Error(msg: invalidInputFailureMessage);
+        },
+        (integer) async* {
+          yield Loading();
 
-        final failureOrNumber =
-            await getConcreteNumber(Params(number: integer));
+          final failureOrNumber =
+              await getConcreteNumber(Params(number: integer));
 
-        yield* _loadedOrErrorState(failureOrNumber!);
-      },);
+          yield* _loadedOrErrorState(failureOrNumber!);
+        },
+      );
     } else if (event is GetRandomNumberEvent) {
       yield Loading();
       final failureOrNumber = await getRandomNumber(NoParams());
@@ -50,7 +53,8 @@ class NumberBloc extends Bloc<NumberEvent, NumberState> {
   }
 
   Stream<NumberState> _loadedOrErrorState(
-      Either<Failure, Number> failureOrNumber,) async* {
+    Either<Failure, Number> failureOrNumber,
+  ) async* {
     yield failureOrNumber.fold(
       (failure) => Error(msg: _failureToMsg(failure)),
       (number) => Loaded(number: number),

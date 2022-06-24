@@ -15,9 +15,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Number Game',
-      theme: ThemeData(primaryColor: Colors.cyan,
-          colorScheme: ColorScheme.fromSwatch().copyWith(
-              secondary: Colors.cyanAccent,),),
+      theme: ThemeData(
+        primaryColor: Colors.cyan,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          secondary: Colors.cyanAccent,
+        ),
+      ),
       home: const NumberScreen(),
     );
   }

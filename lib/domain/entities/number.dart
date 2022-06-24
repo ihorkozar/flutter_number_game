@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class Number extends Equatable{
+class Number extends Equatable {
   final String text;
   final int number;
 
@@ -8,5 +8,4 @@ class Number extends Equatable{
 
   @override
   List<Object?> get props => [text, number];
-
 }

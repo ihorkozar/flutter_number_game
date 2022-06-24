@@ -17,9 +17,10 @@ final serviceLocator = GetIt.instance;
 Future<void> init() async {
   //Bloc
   serviceLocator.registerFactory(() => NumberBloc(
-      getConcreteNumber: serviceLocator(),
-      getRandomNumber: serviceLocator(),
-      inputConverter: serviceLocator(),));
+        getConcreteNumber: serviceLocator(),
+        getRandomNumber: serviceLocator(),
+        inputConverter: serviceLocator(),
+      ));
 
   //Use cases
   serviceLocator
@@ -27,24 +28,28 @@ Future<void> init() async {
   serviceLocator.registerLazySingleton(() => GetRandomNumber(serviceLocator()));
 
   //Repository
-  serviceLocator.registerLazySingleton<NumberRepository>(() =>
-      NumberRepositoryImpl(
-          remoteDataSource: serviceLocator(),
-          localDataSource: serviceLocator(),
-          networkInfo: serviceLocator(),));
+  serviceLocator
+      .registerLazySingleton<NumberRepository>(() => NumberRepositoryImpl(
+            remoteDataSource: serviceLocator(),
+            localDataSource: serviceLocator(),
+            networkInfo: serviceLocator(),
+          ));
 
   // Data sources
   serviceLocator.registerLazySingleton<NumberLocalDataSource>(
-      () => NumberLocalDataSourceImpl(sharedPref: serviceLocator()),);
+    () => NumberLocalDataSourceImpl(sharedPref: serviceLocator()),
+  );
   serviceLocator.registerLazySingleton<NumberRemoteDataSource>(
-      () => NumberRemoteDataSourceImpl(client: serviceLocator()),);
+    () => NumberRemoteDataSourceImpl(client: serviceLocator()),
+  );
 
   //InputConverter
   serviceLocator.registerLazySingleton(() => InputConverter());
 
   //NetworkInfo
   serviceLocator.registerLazySingleton<NetworkInfo>(
-      () => NetworkInfoImpl(),);
+    () => NetworkInfoImpl(),
+  );
 
   //SharedPref
   final sharedPreferences = await SharedPreferences.getInstance();

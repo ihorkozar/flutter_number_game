@@ -12,11 +12,11 @@ import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'number_repositoryimpl_test.mocks.dart';
 
-class MockNumberLocalDataSource extends Mock implements NumberLocalDataSource{}
+class MockNumberLocalDataSource extends Mock implements NumberLocalDataSource {}
 
 @GenerateMocks([NetworkInfo])
 @GenerateMocks([NumberRemoteDataSource])
-void main(){
+void main() {
   late NumberRepositoryImpl repositoryImpl;
   late MockNumberRemoteDataSource remoteDataSource;
   late MockNumberLocalDataSource localDataSource;
@@ -64,71 +64,76 @@ void main(){
 
     runTestsOnline(() {
       test(
-          'should return remote data when the call to remote data source is successful',
-              () async {
-            //arrange
-            when(remoteDataSource.getConcreteNumber(tNumber))
-                .thenAnswer((_) async => tNumberModel);
-            //act
-            final result = await repositoryImpl.getConcreteNumber(tNumber);
-            //assert
-            verify(remoteDataSource.getConcreteNumber(tNumber));
-            expect(result, equals(const Right(tNumberInfo)));
-          },);
+        'should return remote data when the call to remote data source is successful',
+        () async {
+          //arrange
+          when(remoteDataSource.getConcreteNumber(tNumber))
+              .thenAnswer((_) async => tNumberModel);
+          //act
+          final result = await repositoryImpl.getConcreteNumber(tNumber);
+          //assert
+          verify(remoteDataSource.getConcreteNumber(tNumber));
+          expect(result, equals(const Right(tNumberInfo)));
+        },
+      );
       test(
-          'should cache the data locally when the call to remote data source is successful',
-              () async {
-            //arrange
-            when(remoteDataSource.getConcreteNumber(tNumber))
-                .thenAnswer((_) async => tNumberModel);
-            //act
-            await repositoryImpl.getConcreteNumber(tNumber);
-            //assert
-            verify(remoteDataSource.getConcreteNumber(tNumber));
-            verify(localDataSource.cacheNumber(tNumberModel));
-          },);
+        'should cache the data locally when the call to remote data source is successful',
+        () async {
+          //arrange
+          when(remoteDataSource.getConcreteNumber(tNumber))
+              .thenAnswer((_) async => tNumberModel);
+          //act
+          await repositoryImpl.getConcreteNumber(tNumber);
+          //assert
+          verify(remoteDataSource.getConcreteNumber(tNumber));
+          verify(localDataSource.cacheNumber(tNumberModel));
+        },
+      );
       test(
-          'should return server failure when the call to remote data source is unsuccessful',
-              () async {
-            //arrange
-            when(remoteDataSource.getConcreteNumber(tNumber))
-                .thenThrow(ServerException());
-            //act
-            final result = await repositoryImpl.getConcreteNumber(tNumber);
-            //assert
-            verify(remoteDataSource.getConcreteNumber(tNumber));
-            verifyZeroInteractions(localDataSource);
-            expect(result, equals(Left(ServerFailure())));
-          },);
+        'should return server failure when the call to remote data source is unsuccessful',
+        () async {
+          //arrange
+          when(remoteDataSource.getConcreteNumber(tNumber))
+              .thenThrow(ServerException());
+          //act
+          final result = await repositoryImpl.getConcreteNumber(tNumber);
+          //assert
+          verify(remoteDataSource.getConcreteNumber(tNumber));
+          verifyZeroInteractions(localDataSource);
+          expect(result, equals(Left(ServerFailure())));
+        },
+      );
     });
 
     runTestsOffline(() {
       test(
-          'should return last locally cached data when the cached data is present',
-              () async {
-            //arrange
-            when(localDataSource.getLastNumber())
-                .thenAnswer((_) async => tNumberModel);
-            //act
-            final result = await repositoryImpl.getConcreteNumber(tNumber);
-            //assert
-            verifyZeroInteractions(remoteDataSource);
-            verify(localDataSource.getLastNumber());
-            expect(result, equals(const Right(tNumberInfo)));
-          },);
+        'should return last locally cached data when the cached data is present',
+        () async {
+          //arrange
+          when(localDataSource.getLastNumber())
+              .thenAnswer((_) async => tNumberModel);
+          //act
+          final result = await repositoryImpl.getConcreteNumber(tNumber);
+          //assert
+          verifyZeroInteractions(remoteDataSource);
+          verify(localDataSource.getLastNumber());
+          expect(result, equals(const Right(tNumberInfo)));
+        },
+      );
 
-      test('should return CacheFailure when there is no cached data present',
-              () async {
-            //arrange
-            when(localDataSource.getLastNumber())
-                .thenThrow(CacheException());
-            //act
-            final result = await repositoryImpl.getConcreteNumber(tNumber);
-            //assert
-            verifyZeroInteractions(remoteDataSource);
-            verify(localDataSource.getLastNumber());
-            expect(result, equals(Left(CacheFailure())));
-          },);
+      test(
+        'should return CacheFailure when there is no cached data present',
+        () async {
+          //arrange
+          when(localDataSource.getLastNumber()).thenThrow(CacheException());
+          //act
+          final result = await repositoryImpl.getConcreteNumber(tNumber);
+          //assert
+          verifyZeroInteractions(remoteDataSource);
+          verify(localDataSource.getLastNumber());
+          expect(result, equals(Left(CacheFailure())));
+        },
+      );
     });
   });
 
@@ -144,71 +149,70 @@ void main(){
 
     runTestsOnline(() {
       test(
-          'should return remote data when the call to remote data source is successful',
-              () async {
+        'should return remote data when the call to remote data source is successful',
+        () async {
+          when(remoteDataSource.getRandomNumber())
+              .thenAnswer((_) async => tNumberModel);
 
-            when(remoteDataSource.getRandomNumber())
-                .thenAnswer((_) async => tNumberModel);
+          final result = await repositoryImpl.getRandomNumber();
 
-            final result = await repositoryImpl.getRandomNumber();
-
-            verify(remoteDataSource.getRandomNumber());
-            expect(result, equals(const Right(tNumberInfo)));
-          },);
+          verify(remoteDataSource.getRandomNumber());
+          expect(result, equals(const Right(tNumberInfo)));
+        },
+      );
       test(
-          'should cache the data locally when the call to remote data source is successful',
-              () async {
+        'should cache the data locally when the call to remote data source is successful',
+        () async {
+          when(remoteDataSource.getRandomNumber())
+              .thenAnswer((_) async => tNumberModel);
 
-            when(remoteDataSource.getRandomNumber())
-                .thenAnswer((_) async => tNumberModel);
+          await repositoryImpl.getRandomNumber();
 
-            await repositoryImpl.getRandomNumber();
-
-            verify(remoteDataSource.getRandomNumber());
-            verify(localDataSource.cacheNumber(tNumberModel));
-          },);
+          verify(remoteDataSource.getRandomNumber());
+          verify(localDataSource.cacheNumber(tNumberModel));
+        },
+      );
       test(
-          'should return serverfailure when the call to remote data source is successful',
-              () async {
+        'should return serverfailure when the call to remote data source is successful',
+        () async {
+          when(remoteDataSource.getRandomNumber()).thenThrow(ServerException());
 
-            when(remoteDataSource.getRandomNumber())
-                .thenThrow(ServerException());
+          final result = await repositoryImpl.getRandomNumber();
 
-            final result = await repositoryImpl.getRandomNumber();
-
-            verify(remoteDataSource.getRandomNumber());
-            verifyZeroInteractions(localDataSource);
-            expect(result, equals(Left(ServerFailure())));
-          },);
+          verify(remoteDataSource.getRandomNumber());
+          verifyZeroInteractions(localDataSource);
+          expect(result, equals(Left(ServerFailure())));
+        },
+      );
     });
 
     runTestsOffline(() {
       test(
-          'should return last locally cached data when the cached data is present',
-              () async {
+        'should return last locally cached data when the cached data is present',
+        () async {
+          when(localDataSource.getLastNumber())
+              .thenAnswer((_) async => tNumberModel);
 
-            when(localDataSource.getLastNumber())
-                .thenAnswer((_) async => tNumberModel);
+          final result = await repositoryImpl.getRandomNumber();
 
-            final result = await repositoryImpl.getRandomNumber();
+          verifyZeroInteractions(remoteDataSource);
+          verify(localDataSource.getLastNumber());
+          expect(result, equals(const Right(tNumberInfo)));
+        },
+      );
 
-            verifyZeroInteractions(remoteDataSource);
-            verify(localDataSource.getLastNumber());
-            expect(result, equals(const Right(tNumberInfo)));
-          },);
+      test(
+        'should return CacheFailure when there is no cached data present',
+        () async {
+          when(localDataSource.getLastNumber()).thenThrow(CacheException());
 
-      test('should return CacheFailure when there is no cached data present',
-              () async {
+          final result = await repositoryImpl.getRandomNumber();
 
-            when(localDataSource.getLastNumber())
-                .thenThrow(CacheException());
-
-            final result = await repositoryImpl.getRandomNumber();
-
-            verifyZeroInteractions(remoteDataSource);
-            verify(localDataSource.getLastNumber());
-            expect(result, equals(Left(CacheFailure())));
-          },);
+          verifyZeroInteractions(remoteDataSource);
+          verify(localDataSource.getLastNumber());
+          expect(result, equals(Left(CacheFailure())));
+        },
+      );
     });
   });
 }

@@ -113,7 +113,7 @@ void main() {
   });
 
   group('GetTriviaForRandomNumber', () {
-    const  tNumberTrivia = Number(text: 'test', number: 1);
+    const tNumberTrivia = Number(text: 'test', number: 1);
 
     test('should get data from the random usecase', () async* {
       when(mockGetRandomNumber(any))
@@ -127,7 +127,11 @@ void main() {
         () async* {
       when(mockGetRandomNumber(any))
           .thenAnswer((_) async => const Right(tNumberTrivia));
-      final expected = [Empty(), Loading(), const Loaded(number: tNumberTrivia)];
+      final expected = [
+        Empty(),
+        Loading(),
+        const Loaded(number: tNumberTrivia)
+      ];
       expectLater(bloc, emitsInOrder(expected));
       bloc.add(GetRandomNumberEvent());
     });

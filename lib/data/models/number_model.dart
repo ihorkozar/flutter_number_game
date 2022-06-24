@@ -8,8 +8,8 @@ class NumberModel extends Number {
 
   factory NumberModel.fromJson(Map<String, dynamic> json) {
     return NumberModel(
-        text: json['text'],
-        number: (json['number']).toInt(),
+      text: json['text'],
+      number: (json['number']).toInt(),
     );
   }
 

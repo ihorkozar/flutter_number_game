@@ -19,7 +19,8 @@ void main() {
     });
 
     test('return model when JSON number is double', () async {
-      final Map<String, dynamic> jsonMap = json.decode(fixture('test_double.json'));
+      final Map<String, dynamic> jsonMap =
+          json.decode(fixture('test_double.json'));
       final res = NumberModel.fromJson(jsonMap);
       expect(res, tNumberModel);
     });

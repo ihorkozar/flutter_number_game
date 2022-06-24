@@ -16,7 +16,7 @@ class GetConcreteNumber implements UseCase<Number, Params> {
   }
 }
 
-class Params extends Equatable{
+class Params extends Equatable {
   final int number;
 
   const Params({required this.number});
