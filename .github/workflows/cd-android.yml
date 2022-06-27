@@ -1,5 +1,5 @@
-# cd.yml
-name: CD
+# cd-android.yml
+name: CD Android
 
 on:
   push:
